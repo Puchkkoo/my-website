@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - TradePro</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #5367fe;
+            --secondary: #1e2132;
+            --light: #f5f7ff;
+            --dark: #0e1018;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+        }
+
+        /* Identical Header */
+        nav {
+            background-color: white;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--secondary);
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.6rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            outline: none;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(83, 103, 254, 0.3);
+        }
+
+        /* About Content */
+        .about-container {
+            max-width: 800px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+
+        .profile-icon {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            margin: 2rem auto;
+            display: block;
+            object-fit: cover;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .about-content {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .about-content h1 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .about-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #444;
+            margin-bottom: 1.5rem;
+            text-align: justify;
+        }
+
+        .signature {
+            font-family: 'Brush Script MT', cursive;
+            font-size: 1.8rem;
+            color: var(--secondary);
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .about-container {
+                margin: 2rem auto;
+            }
+            
+            .profile-icon {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .about-content h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Identical Header -->
+    <nav>
+        <div class="logo">Flamingo</div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="index.html#features">Features</a>
+            <a href="index.html#services">Services</a>
+            <a href="index.html#contact">Contact</a>
+        </div>
+        <div class="auth-buttons">
+            <button class="btn btn-outline">Login</button>
+            <button class="btn btn-primary">Sign Up</button>
+        </div>
+    </nav>
+
+    <!-- About Content -->
+    <div class="about-container">
+        <!-- <img src="profile.jpg" alt="Profile Icon" class="profile-icon"> -->
+        <div class="about-content">
+            <h1>Hello, I'm a Finance Enthusiast</h1>
+           <p>
+            Hey, I’m Anupam Singh, a 19-year-old entrepreneur, builder, and visionary with a passion for pushing the boundaries of technology, finance, and innovation. I don’t just dream about the future I build it.
+           </p>
+           <p>
+            From an early age, I’ve been fascinated by how technology can shape economies, transform industries, and redefine human potential. That curiosity has led me to explore multiple fields from AI and fintech to space tech and next-gen internet infrastructure all with one goal: to create impactful, scalable, and disruptive solutions.
+           </p>
+           <p>
+            What I’m Building 🚀
+           </p>
+           <p>
+         
+Right now, I’m working on Infinity - Flamingo, an AI-driven finance and brokerage platform designed to make investing smarter and more accessible for everyone from beginners to professionals. Beyond this, I’m actively developing and exploring innovative technologies that have the potential to reshape industries and unlock new opportunities in the digital economy.
+
+           </p>
+           <p>
+            I thrive at the intersection of AI, finance, space, and the internet, constantly looking for ways to build the next generation of companies that change how we live and work.
+           </p>
+           <p>
+            My Vision 🌍
+           </p>
+           <p>
+            I believe in breaking barriers and building limitless possibilities. The future isn’t something we wait for—it’s something we create. My vision is to build AI-powered systems, financial solutions, and deep tech innovations that reshape industries, empower people, and make technology more inclusive.
+           </p>
+           <p>
+            The Mindset That Drives Me 💡
+           </p>
+           <p>
+I don’t believe in limits only in challenges waiting to be solved. Whether it's launching a startup, learning complex topics, or tackling global problems, I thrive in high-pressure, high-impact environments. I embrace the unknown because that’s where the real breakthroughs happen.
+           </p>
+           <p>
+            One Thing About Me
+           </p>
+           <p>
+            I thrive in the unknown. Whether it's exploring uncharted business ideas or diving into complex technologies, I find energy in challenges that most people shy away from. The harder the problem, the more determined I am to solve it.
+
+If you’re into big ideas, cutting-edge tech, or just love discussing bold visions, let’s connect. I’m always open to collaborating, brainstorming, and building the future.
+           </p>
+           <p>
+           
+I’m a relentless learner. Whether it’s deep-diving into physics, studying financial markets, or building scalable tech, I believe knowledge is the most powerful tool to drive change. My hunger to learn and apply ideas in the real world is what fuels me every day.
+           </p>
+            <div class="signature">.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#x2212; Anupam Singh</div>
+        </div>
+    </div>
+</body>
+</html>

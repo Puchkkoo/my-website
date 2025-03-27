@@ -1,0 +1,1271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TradePro - Modern Brokerage Platform</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #5367fe;
+            --secondary: #1e2132;
+            --light: #f5f7ff;
+            --dark: #0e1018;
+            --success: #00c853;
+            --danger: #ff3d71;
+            --warning: #ffaa00;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+        
+        /* Navbar */
+        nav {
+            background-color: white;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--secondary);
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: width 0.3s;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .btn {
+            padding: 0.6rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            outline: none;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(83, 103, 254, 0.3);
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: calc(100vh - 70px);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            padding: 0 5%;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-content {
+            z-index: 10;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            color: #555;
+            max-width: 600px;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .hero-image {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .dashboard-preview {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            transform: perspective(1000px) rotateY(-10deg);
+            transition: all 0.5s;
+        }
+        
+        .dashboard-preview:hover {
+            transform: perspective(1000px) rotateY(0);
+        }
+        
+    
+        
+        /* Features Section */
+        .features {
+            padding: 5rem 5%;
+            background-color: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .section-title p {
+            max-width: 600px;
+            margin: 0 auto;
+            color: #555;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .feature-card {
+            background-color: var(--light);
+            padding: 2rem;
+            border-radius: 10px;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .feature-icon img {
+            width: 80px;
+            height: 70px;
+            object-fit: contain;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        
+        .feature-card p {
+            color: #555;
+            text-align: center;
+        }
+        
+        /* Services Section */
+        .services {
+            padding: 5rem 5%;
+            background-color: var(--light);
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .service-card {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+            border-bottom: 4px solid transparent;
+        }
+        
+        .service-card:hover {
+            border-bottom: 4px solid var(--primary);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .service-icon {
+            background-color: rgba(83, 103, 254, 0.1);
+            color: var(--primary);
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 1.5rem;
+        }
+        
+        .service-icon img {
+            width: 56px;
+            height: 60px;
+            object-fit: contain;
+        }
+        
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        
+        .service-card p {
+            color: #555;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .service-card a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            justify-content: center;
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            padding: 5rem 5%;
+            background-color: white;
+        }
+        
+        .testimonial-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            padding: 0 50px;
+        }
+        
+        .testimonial-slides {
+            display: flex;
+            overflow: hidden;
+        }
+        
+        .testimonial {
+            min-width: 100%;
+            padding: 2rem;
+            text-align: center;
+            transition: transform 0.5s;
+        }
+        
+        .testimonial-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            object-fit: cover;
+        }
+        
+        .testimonial-quote {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: #444;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+        
+        .testimonial-name {
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+        
+        .testimonial-position {
+            color: #777;
+            font-size: 0.9rem;
+        }
+        
+        .testimonial-navigation {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .testimonial-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #ddd;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .testimonial-dot.active {
+            background-color: var(--primary);
+        }
+        
+        /* Animation Section */
+        .animation-section {
+            padding: 5rem 5%;
+            background-color: var(--light);
+            text-align: center;
+        }
+        
+        .animation-container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            height: 400px;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .market-graph {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        
+        .stock-line {
+            stroke: var(--primary);
+            stroke-width: 3;
+            fill: none;
+            stroke-linecap: round;
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            animation: draw 3s forwards infinite;
+        }
+        
+        .stock-area {
+            fill: url(#gradient);
+            opacity: 0.2;
+        }
+        
+        @keyframes draw {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+        
+        /* Upcoming Features */
+        .upcoming {
+            padding: 5rem 5%;
+            background-color: white;
+        }
+        
+        .timeline {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background-color: var(--primary);
+            transform: translateX(-50%);
+        }
+        
+        .timeline-item {
+            margin-bottom: 3rem;
+            position: relative;
+            display: flex;
+        }
+        
+        .timeline-item:nth-child(odd) {
+            justify-content: flex-end;
+        }
+        
+        .timeline-content {
+            width: 45%;
+            padding: 1.5rem;
+            background-color: var(--light);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .timeline-date {
+            position: absolute;
+            top: 0;
+            width: 120px;
+            padding: 0.5rem 1rem;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50px;
+            text-align: center;
+            font-weight: 500;
+        }
+        
+        .timeline-item:nth-child(odd) .timeline-date {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .timeline-item:nth-child(even) .timeline-date {
+            right: 50%;
+            transform: translateX(50%);
+        }
+        
+        .timeline-content h3 {
+            margin-bottom: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        /* Contact Section */
+        .contact {
+            padding: 5rem 5%;
+            background-color: var(--light);
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .contact-form {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.8rem;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary);
+        }
+        
+        textarea.form-control {
+            resize: vertical;
+            min-height: 120px;
+        }
+        
+        .contact-info {
+            padding: 2rem;
+        }
+        
+        .contact-info h3 {
+            margin-bottom: 1.5rem;
+        }
+        
+        .contact-detail {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .contact-icon {
+            background-color: rgba(83, 103, 254, 0.1);
+            color: var(--primary);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+        }
+        
+        .contact-text h4 {
+            margin-bottom: 0.3rem;
+        }
+        
+        .contact-text p {
+            color: #555;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--secondary);
+            color: white;
+            padding: 4rem 5% 2rem;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-about p {
+            color: #aaa;
+            margin-bottom: 1.5rem;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .social-link:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .footer-title {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        .footer-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--primary);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-links a {
+            color: #aaa;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
+            text-align: center;
+            color: #aaa;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-fade-in {
+            animation: fadeIn 1s forwards;
+        }
+        
+        .delay-1 {
+            animation-delay: 0.2s;
+        }
+        
+        .delay-2 {
+            animation-delay: 0.4s;
+        }
+        
+        .delay-3 {
+            animation-delay: 0.6s;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero {
+                grid-template-columns: 1fr;
+                text-align: center;
+                padding: 2rem 5%;
+                height: auto;
+            }
+            
+            .hero-content {
+                margin-bottom: 3rem;
+            }
+            
+            .hero p {
+                margin: 0 auto 2rem;
+            }
+            
+            .cta-buttons {
+                justify-content: center;
+            }
+            
+            .dashboard-preview {
+                transform: none;
+                width: 90%;
+            }
+            
+            .timeline::before {
+                left: 30px;
+            }
+            
+            .timeline-item {
+                justify-content: flex-start;
+                padding-left: 60px;
+            }
+            
+            .timeline-content {
+                width: 100%;
+            }
+            
+            .timeline-date {
+                left: 0 !important;
+                transform: none !important;
+                top: -30px;
+                width: auto;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-nav-toggle {
+                display: block;
+                background: none;
+                border: none;
+                font-size: 1.5rem;
+                color: var(--secondary);
+                cursor: pointer;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+        }
+        .about-link {
+            position: relative;
+        }
+        .about-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: width 0.3s;
+        }
+        .about-link:hover::after {
+            width: 100%;
+        }   
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">Flamingo</div>
+        <div class="nav-links">
+            <a href="about.html" class="about-link">About</a>
+            <a href="#features">Features</a>
+            <a href="#services">Services</a>
+            <a href="#upcoming">Roadmap</a>
+            <a href="#testimonials">Testimonials</a>
+            <a href="#contact">Contact</a>
+        </div>
+        <div class="auth-buttons">
+            <button class="btn btn-outline">Login</button>
+            <button class="btn btn-primary">Sign Up</button>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content animate-fade-in">
+            <h1>Modern AI Trading Platform for Smart Investors</h1>
+            <p>Trade stocks, options, mutual funds, and more with zero brokerage fees on delivery trades. Experience lightning-fast execution and advanced charting tools.</p>
+            <div class="cta-buttons">
+                <button class="btn btn-primary">Open Free Account</button>
+                <button class="btn btn-outline">View Pricing</button>
+            </div>
+        </div>
+        <div>
+        <div class="hero-image animate-fade-in delay-1">
+            <img src="image.jpg" alt="Trading Dashboard" class="dashboard-preview">
+          
+        </div>
+                    <p style="color: #0894d0e6;font-weight: bolder;">   . &nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;Trade with confidence and Invest with intellegence</p>
+        </div>
+    </section>
+    
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="section-title">
+            <h2>Powerful Trading Features</h2>
+            <p>Everything you need to make informed investment decisions and execute trades efficiently.</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card animate-fade-in">
+                <div class="feature-icon">
+                    <img src="Advance charting.png" alt="Advanced Charting">
+                </div>
+                <h3>Advanced Charting</h3>
+                <p>Professional-grade charts with 100+ indicators, drawing tools, and multiple timeframes to analyze market movements.</p>
+            </div>
+            <div class="feature-card animate-fade-in delay-1">
+                <div class="feature-icon">
+                    <img src="lightning  execution.png" alt="Fast Execution">
+                </div>
+                <h3>Lightning-Fast Execution</h3>
+                <p>Execute trades in milliseconds with our high-performance infrastructure and direct market access.</p>
+            </div>
+            <div class="feature-card animate-fade-in delay-2">
+                <div class="feature-icon">
+                    <img src="Mobile trading.png" alt="Mobile Trading">
+                </div>
+                <h3>Mobile Trading</h3>
+                <p>Trade on the go with our powerful mobile app available for iOS and Android devices.</p>
+            </div>
+            <div class="feature-card animate-fade-in">
+                <div class="feature-icon">
+                    <img src="bank grade security.png" alt="Bank Security">
+                </div>
+                <h3>Bank-Grade Security</h3>
+                <p>Your investments are protected with 256-bit encryption, two-factor authentication, and insurance coverage.</p>
+            </div>
+            <div class="feature-card animate-fade-in delay-1">
+                <div class="feature-icon">
+                    <img src="algo trading.png" alt="Algo Trading">
+                </div>
+                <h3>Algo Trading</h3>
+                <p>Create and deploy automated trading strategies with our API and backtesting framework.</p>
+            </div>
+            <div class="feature-card animate-fade-in delay-2">
+                <div class="feature-icon">
+                    <img src="learning resource.png" alt="Learning Resources">
+                </div>
+                <h3>Learning Resources</h3>
+                <p>Access educational content, webinars, and market insights to improve your trading skills.</p>
+            </div>
+            <div class="feature-card animate-fade-in delay-2">
+                <div class="feature-icon">
+                    <img src="coming soon.png" alt="coming soon">
+                </div>
+                <h3>Coming Soon!!</h3>
+               
+            </div>
+        
+        </div>
+
+    </section>
+    
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="section-title">
+            <h2>Our Services</h2>
+            <p>Comprehensive investment solutions for every type of trader and investor.</p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card animate-fade-in">
+                <div class="service-icon">
+                    <img src="equity trading.png" alt="Equity Trading">
+                </div>
+                <h3>Equity Trading</h3>
+                <p>Trade stocks across major exchanges with zero brokerage on delivery trades and flat ₹20 per order for intraday.</p>
+                <a href="#">Learn More <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="service-card animate-fade-in delay-1">
+                <div class="service-icon">
+                    <img src="mutual fund.png" alt="Mutual Funds">
+                </div>
+                <h3>Mutual Funds</h3>
+                <p>Invest in 5000+ direct mutual funds with zero commission and create SIPs with just a few clicks.</p>
+                <a href="#">Learn More <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="service-card animate-fade-in delay-2">
+                <div class="service-icon">
+                    <img src="f&o trading.png" alt="F&O Trading">
+                </div>
+                <h3>F&O Trading</h3>
+                <p>Trade futures and options across equity, commodity, and currency segments with advanced order types.</p>
+                <a href="#">Learn More <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="service-card animate-fade-in">
+                <div class="service-icon">
+                    <img src="ipo investment.png" alt="IPO Investments">
+                </div>
+                <h3>IPO Investments</h3>
+                <p>Apply for IPOs digitally through UPI with a seamless application process and instant allotment status.</p>
+                <a href="#">Learn More <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="service-card animate-fade-in delay-1">
+                <div class="service-icon">
+                    <img src="international investing.png" alt="International Investing">
+                </div>
+                <h3>International Investing</h3>
+                <p>Invest in US stocks, ETFs, and fractional shares with competitive forex rates and no minimum investment.</p>
+                <a href="#">Learn More <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="service-card animate-fade-in delay-2">
+                <div class="service-icon">
+                    <img src="tax report.png" alt="Tax Reports">
+                </div>
+                <h3>Tax Reports</h3>
+                <p>Comprehensive P&L statements, tax reports, and contract notes for easy financial reporting and compliance.</p>
+                <a href="#">Learn More <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="service-card animate-fade-in delay-2">
+                <div class="service-icon">
+                    <img src="portfolio-management.png" alt="Portfolio Management">
+                </div>
+                <h3>Portfolio Management</h3>
+                <p>Track and optimize your investments with our professional portfolio management services for better returns.</p>
+                <a href="#">Learn More <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="service-card animate-fade-in delay-2">
+                <div class="service-icon">
+                    <img src="coming soon.png" alt="coming soon">
+                </div>
+                <h3>Coming soon!!</h3>
+
+            </div>
+
+    </section>
+    
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="section-title">
+            <h2>What Our Traders Say</h2>
+            <p>Join thousands of satisfied investors who trust TradePro for their investment needs.</p>
+        </div>
+        <div class="testimonial-wrapper">
+            <div class="testimonial-slides">
+                <div class="testimonial">
+                    <img src="avatar.jpg" alt="User Avatar" class="testimonial-avatar">
+                    <p class="testimonial-quote">"TradePro's platform is lightning fast and the charts are incredibly detailed. I've improved my trading performance significantly since switching from my previous broker."</p>
+                    <h4 class="testimonial-name">Rajesh Sharma</h4>
+                   
+                </div>
+                <div class="testimonial">
+                    <img src="/api/placeholder/200/200" alt="User Avatar" class="testimonial-avatar">
+                    <p class="testimonial-quote">"The zero brokerage on delivery trades has helped me build a strong long-term portfolio without worrying about fees. Their mutual fund platform is the simplest I've used!"</p>
+                    <h4 class="testimonial-name">Priya Patel</h4>
+                    <div class="testimonial-position">Long-term Investor, 2 years with TradePro</div>
+                </div>
+                <div class="testimonial">
+                    <img src="/api/placeholder/200/200" alt="User Avatar" class="testimonial-avatar">
+                    <p class="testimonial-quote">"As an algo trader, TradePro's API is exactly what I needed. The documentation is comprehensive and the execution speed is unmatched in the industry."</p>
+                    <h4 class="testimonial-name">Vikram Mehta</h4>
+                    <div class="testimonial-position">Algorithmic Trader, 1 year with TradePro</div>
+                </div>
+            </div>
+            <div class="testimonial-navigation">
+                <!-- <div class="testimonial-dot active"></div>
+                <div class="testimonial-dot"></div>
+                <div class="testimonial-dot"></div>
+            </div> -->
+        </div>
+    </section>
+    
+    <!-- Animation Section -->
+    <section class="animation-section">
+        <div class="section-title">
+            <h2>Visualize Market Trends</h2>
+            <p>Our advanced charting tools help you spot opportunities and make informed decisions.</p>
+        </div>
+        <div class="animation-container">
+            <svg class="market-graph" viewBox="0 0 800 400">
+                <defs>
+                    <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#5367fe" stop-opacity="1" />
+                        <stop offset="100%" stop-color="#5367fe" stop-opacity="0" />
+                    </linearGradient>
+                </defs>
+                <path class="stock-line" d="M0,300 C50,280 100,350 150,250 C200,150 250,200 300,170 C350,140 400,180 450,120 C500,60 550,100 600,80 C650,60 700,120 750,100 L750,400 L0,400 Z" />
+                <path class="stock-area" d="M0,300 C50,280 100,350 150,250 C200,150 250,200 300,170 C350,140 400,180 450,120 C500,60 550,100 600,80 C650,60 700,120 750,100 L750,400 L0,400 Z" />
+                
+                <!-- Price Points -->
+                <circle cx="0" cy="300" r="5" fill="#5367fe" />
+                <circle cx="150" cy="250" r="5" fill="#5367fe" />
+                <circle cx="300" cy="170" r="5" fill="#5367fe" />
+                <circle cx="450" cy="120" r="5" fill="#5367fe" />
+                <circle cx="600" cy="80" r="5" fill="#5367fe" />
+                <circle cx="750" cy="100" r="5" fill="#5367fe" />
+                
+                <!-- Grid Lines -->
+                <line x1="0" y1="100" x2="800" y2="100" stroke="#ddd" stroke-width="1" />
+                <line x1="0" y1="200" x2="800" y2="200" stroke="#ddd" stroke-width="1" />
+                <line x1="0" y1="300" x2="800" y2="300" stroke="#ddd" stroke-width="1" />
+                
+                <!-- Y-Axis Labels -->
+                <text x="10" y="100" fill="#666" font-size="12">₹500</text>
+                <text x="10" y="200" fill="#666" font-size="12">₹350</text>
+                <text x="10" y="300" fill="#666" font-size="12">₹200</text>
+                
+                <!-- X-Axis Labels -->
+                <text x="0" y="350" fill="#666" font-size="12">Jan</text>
+                <text x="150" y="350" fill="#666" font-size="12">Feb</text>
+                <text x="300" y="350" fill="#666" font-size="12">Mar</text>
+                <text x="450" y="350" fill="#666" font-size="12">Apr</text>
+                <text x="600" y="350" fill="#666" font-size="12">May</text>
+                <text x="750" y="350" fill="#666" font-size="12">Jun</text>
+            </svg>
+        </div>
+    </section>
+    
+    <!-- Upcoming Features Section -->
+    <section class="upcoming" id="upcoming">
+        <div class="section-title">
+            <h2>Upcoming Features</h2>
+            <p>We're constantly improving our platform. Here's what's coming next.</p>
+        </div>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-date">June 2025</div>
+                <div class="timeline-content">
+                    <h3>Advanced Screener</h3>
+                    <p>Filter stocks based on 100+ technical and fundamental parameters. Save custom screens and set alerts when stocks match your criteria.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">August 2025</div>
+                <div class="timeline-content">
+                    <h3>Portfolio Analytics</h3>
+                    <p>Get detailed insights into your portfolio performance with advanced risk metrics, sector allocation, and benchmark comparison.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">September 2025</div>
+                <div class="timeline-content">
+                    <h3>Social Trading</h3>
+                    <p>Follow successful traders, share investment ideas, and engage with the community through our integrated social platform.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">October 2025</div>
+                <div class="timeline-content">
+                    <h3>AI-Powered Insights</h3>
+                    <p>Receive personalized investment recommendations and market insights powered by our advanced AI algorithms.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+               
+                <div class="timeline-content">
+                    <h3>Coming Soon !!</h3>
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="section-title">
+            <h2>Get In Touch</h2>
+            <p>Have questions? Our support team is here to help you.</p>
+        </div>
+        <div class="contact-grid">
+            <div class="contact-form">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <select id="subject" class="form-control">
+                            <option value="account">Account Opening</option>
+                            <option value="support">Technical Support</option>
+                            <option value="feedback">Feedback</option>
+                            <option value="partnership">Partnership</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" class="form-control" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                </form>
+            </div>
+            <div class="contact-info">
+                <h3>Contact Information</h3>
+                <div class="contact-detail">
+                    <!-- <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div> -->
+                    <!-- <div class="contact-text">
+                        <h4>Address</h4>
+                        <p>TradePro Towers, 123 Financial District, Mumbai 400001, India</p>
+                    </div>
+                </div>
+                <div class="contact-detail">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <div class="contact-text">
+                        <h4>Phone</h4>
+                        <p>+91 1800 123 4567 (Toll-Free)</p>
+                    </div> -->
+                </div>
+                <div class="contact-detail">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="contact-text">
+                        <h4>Email</h4>
+                        <p>anupam16singh@gmail.com</p>
+                    </div>
+                </div>
+                <div class="contact-detail">
+                    <div class="contact-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="contact-text">
+                        <h4>Support Hours</h4>
+                        <p>Monday to Sunday: 24&#xd7;7</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-about">
+                <div class="footer-logo">Flamingo</div>
+                <p>Flamingo is a modern trading platform that offers zero brokerage on all delivery trades and  intraday trades.</p>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-links-col">
+                <h3 class="footer-title">Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Our Products</a></li>
+                    <li><a href="#">Pricing</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Blog</a></li>
+                </ul>
+            </div>
+            <div class="footer-links-col">
+                <h3 class="footer-title">Support</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">Documentation</a></li>
+                    <li><a href="#">API</a></li>
+                    <li><a href="#">Community</a></li>
+                    <li><a href="#">Status</a></li>
+                </ul>
+            </div>
+            <div class="footer-links-col">
+                <h3 class="footer-title">Legal</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Risk Disclosure</a></li>
+                    <li><a href="#">Refund Policy</a></li>
+                    <li><a href="#">KYC Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Flamingo. All rights reserved. | </p>
+        </div>
+    </footer>
+    
+    <!-- JavaScript -->
+    <script>
+        // // Testimonial Slider
+        // const testimonialSlides = document.querySelector('.testimonial-slides');
+        // const dots = document.querySelectorAll('.testimonial-dot');
+        
+        // dots.forEach((dot, index) => {
+        //     dot.addEventListener('click', () => {
+        //         // Update active dot
+        //         document.querySelector('.testimonial-dot.active').classList.remove('active');
+        //         dot.classList.add('active');
+                
+        //         // Slide to the selected testimonial
+        //         testimonialSlides.style.transform = translateX(-${index * 100}%);
+        //     });
+        // });
+        
+        // // Auto-slide testimonials
+        // let currentSlide = 0;
+        // const testimonialCount = dots.length;
+        
+        // setInterval(() => {
+        //     currentSlide = (currentSlide + 1) % testimonialCount;
+        //     dots[currentSlide].click();
+        // }, 5000);
+        
+        // Animation on scroll
+        const animatedElements = document.querySelectorAll('.animate-fade-in');
+        
+        function checkVisibility() {
+            animatedElements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect();
+                const windowHeight = window.innerHeight;
+                
+                if (elementPosition.top < windowHeight * 0.9) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        }
+        
+        // Initial check
+        checkVisibility();
+        
+        // Check on scroll
+        window.addEventListener('scroll', checkVisibility);
+        
+        // Contact Form Submit
+        const contactForm = document.getElementById('contactForm');
+        
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                subject: document.getElementById('subject').value,
+                message: document.getElementById('message').value
+            };
+            
+            // Here you would typically send the data to your server
+            console.log('Form submitted:', formData);
+            
+            // Show success message
+            alert('Thank you for your message! Our team will get back to you soon.');
+            
+            // Reset form
+            contactForm.reset();
+        });
+    </script>
+</body>
+</html>
